@@ -51,15 +51,22 @@ public void Hook_OnWeaponDropPost(int client, int weapon)
 public Action Hook_OnWeaponCanUse(int client, int weapon)
 {
     client = GetClientUserId(client);
-    if (weaponOwners[weapon] == 0 || weaponOwners[weapon] == client)
+
+    // Let bots pick up whatever they want
+    if (IsFakeClient(client))
     {
-        // PrintToChatAll("[CDW-DEBUG] ALLOWED GUN PICKUP (OWNER = %i)", weaponOwners[weapon]);
-        weaponOwners[weapon] = client;
-        // PrintToChatAll("[CDW-DEBUG] NEW GUN OWNER = %i", weaponOwners[weapon]);
         return Plugin_Continue;
     }
 
-    // PrintToChatAll("[CDW-DEBUG] DONT ALLOW GUN PICKUP (OWNER = %i)", weaponOwners[weapon]);
+    // Check if weapon was given by Server or if it belongs to the client.
+    // Allow pickup if so.
+    if (weaponOwners[weapon] == 0 || weaponOwners[weapon] == client)
+    {
+        weaponOwners[weapon] = client;
+        return Plugin_Continue;
+    }
+
+    // Deny pick up.
     return Plugin_Handled;
 } 
 
