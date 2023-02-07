@@ -41,6 +41,10 @@ public void OnClientPostAdminCheck(int client)
 
 public void Hook_OnWeaponDropPost(int client, int weapon)
 {
+    // Ensure weapon index isn't -1 (this usuallys happens on team switch)
+    if (weapon == -1)
+        return; 
+        
     // Get client userID
     client = GetClientUserId(client);
 
@@ -60,7 +64,7 @@ public Action Hook_OnWeaponCanUse(int client, int weapon)
     client = GetClientUserId(client);
 
     // Let bots pick up whatever they want
-    if (IsFakeClient(client))
+    if (IsClientConnected(client) && IsFakeClient(client))
     {
         return Plugin_Continue;
     }
