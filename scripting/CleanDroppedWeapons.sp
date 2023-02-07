@@ -23,6 +23,13 @@ public void OnPluginStart()
     AutoExecConfig(true, "CleanDroppedWeapons");
 }
 
+public void OnMapEnd()
+{
+    // Reset weapon owners array
+    for (int i = 0; i < 4096; i++)
+        weaponOwners[i] = 0;
+}
+
 public void OnClientPostAdminCheck(int client)
 {
     if (g_cvCleanup.BoolValue == true)
