@@ -61,7 +61,7 @@ public void Hook_OnWeaponDropPost(int client, int weapon)
 
 public Action Hook_OnWeaponCanUse(int client, int weapon)
 {
-    client = GetClientUserId(client);
+    int userID = GetClientUserId(client);
 
     // Let bots pick up whatever they want
     if (IsClientConnected(client) && IsFakeClient(client))
@@ -71,9 +71,9 @@ public Action Hook_OnWeaponCanUse(int client, int weapon)
 
     // Check if weapon was given by Server or if it belongs to the client.
     // Allow pickup if so.
-    if (weaponOwners[weapon] == 0 || weaponOwners[weapon] == client)
+    if (weaponOwners[weapon] == 0 || weaponOwners[weapon] == userID)
     {
-        weaponOwners[weapon] = client;
+        weaponOwners[weapon] = userID;
         return Plugin_Continue;
     }
 
