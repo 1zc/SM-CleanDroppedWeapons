@@ -8,7 +8,7 @@ public Plugin myinfo = {
 	name = "Clean Dropped Weapons", 
 	author = "Infra", 
 	description = "A simple plugin to clean up weapons when they are dropped. Has functionality to prevent players from picking dropped weapons up.", 
-	version = "1.0", 
+	version = "1.1", 
 	url = "https://github.com/1zc"
 };
 
